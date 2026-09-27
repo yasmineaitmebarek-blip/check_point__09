@@ -1,48 +1,65 @@
-# 1. IndexError
-mylist = [14, "hello", 967]
-# Error: the list has only 3 elements.
-# The available indexes are 0, 1 and 2.
-print(mylist[2])
-# 2. Import Pandas and NumPy
-# Error: module names are written in lowercase.
-import pandas
-import numpy
-# 3. SyntaxError
-# Error: print() needs parentheses.
-print("python errors")
-# 4. KeyError
-mydictionnary = {True: "hello", False: "bye", '3': "python"}
-# Error: 'True' is a string, but True is a boolean.
-print(mydictionnary[True])
-# 5. IndentationError
-i = 14
-while i < 78:
-    # Error: the instructions inside the while loop must be indented.
-    print(i)
-    i += 1
-# 6. StopIteration
-it = iter([1, 2, 3])
-print(next(it))
-print(next(it))
-print(next(it))
-# Error: there are only 3 elements.
-try:
-    print(next(it))
-except StopIteration:
-    print("There are no more elements.")
-# 7. TypeError
-# Error: we cannot add a string and an integer.
-result = 15 + 15
-print(result)
-# 8. ValueError
-# Error: "python" cannot be converted into an integer.
-result = int("15")
-print(result)
-# 9. NameError
-# Error: the variable python was not defined.
-python = "Python"
-print(python)
-# 10. ZeroDivisionError
-# Error: we cannot divide by zero.
-x = 19 / 1
-print(x)
+def binary_search(list, number):
+    first = 0
+    last = len(list) - 1
+    while first <= last:
+        middle = (first + last) // 2
+        if list[middle] == number:
+            return True
+        elif list[middle] < number:
+            first = middle + 1
+        else:
+            last = middle - 1
+    return False
+print(binary_search([1, 2, 3, 5, 8], 6))
+print(binary_search([1, 2, 3, 5, 8], 5))
+def power(a, b):
+    if b == 0:
+        return 1
+    else:
+        return a * power(a, b - 1)
+print(power(3, 4))
+def bubble_sort(list):
+    for i in range(len(list)):
+        for j in range(len(list) - 1):
+            if list[j] > list[j + 1]:
+                list[j], list[j + 1] = list[j + 1], list[j]
+    return list
+list = [29, 13, 22, 37, 52, 49, 46, 71, 56]
+print(bubble_sort(list))
+def merge_sort(list):
+    if len(list) <= 1:
+        return list
+    middle = len(list) // 2
+    left = list[:middle]
+    right = list[middle:]
+    left = merge_sort(left)
+    right = merge_sort(right)
+    result = []
+    i = 0
+    j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i = i + 1
+        else:
+            result.append(right[j])
+            j = j + 1
+    result = result + left[i:]
+    result = result + right[j:]
+    return result
+list = [29, 13, 22, 37, 52, 49, 46, 71, 56]
+print(merge_sort(list))
+def quick_sort(list):
+    if len(list) <= 1:
+        return list
+    pivot = list[0]
+    left = []
+    right = []
+    for i in range(1, len(list)):
+        if list[i] < pivot:
+            left.append(list[i])
+        else:
+            right.append(list[i])
+    return quick_sort(left) + [pivot] + quick_sort(right)
+list = [29, 13, 22, 37, 52, 49, 46, 71, 56]
+print(quick_sort(list))
